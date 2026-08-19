@@ -5,6 +5,7 @@ import jakarta.persistence.Id;
 
 @Entity
 public class PokemonEntity {
+
     @Id
     private int  id_pokemon;
     private String pokemon_name;
