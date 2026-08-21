@@ -26,7 +26,7 @@ public class PokemonService {
 
         if (root != null && root.has("results")) {
             JsonNode results = root.get("results");
-            System.out.println("Total de Pokémons encontrados na API: " + results.size());
+            System.out.println("Total of Pokémons founded on API: " + results.size());
 
             for (JsonNode pokemonNode : results) {
                 String url = pokemonNode.get("url").asText();
@@ -35,18 +35,18 @@ public class PokemonService {
                 if (!pokemonRepository.existsById(id)) {
                     try {
                         fetchAndSavePokemon(id);
-                        System.out.println("Pokémon salvo com sucesso: ID " + id + " - " + pokemonNode.get("name").asText());
+                        System.out.println("Pokemon saved whith sucess: ID " + id + " - " + pokemonNode.get("name").asText());
 
                         Thread.sleep(200);
 
                     } catch (Exception e) {
-                        System.err.println("Erro ao salvar Pokémon ID " + id + ": " + e.getMessage());
+                        System.err.println("Error saving Pokemon ID " + id + ": " + e.getMessage());
                     }
                 } else {
-                    System.out.println("Pokémon ID " + id + " já existe no banco. Pulando...");
+                    System.out.println("Pokemon ID " + id + " alredi exists on Data Base. Skiping...");
                 }
             }
-            System.out.println("Sincronização de todos os Pokémons finalizada!");
+            System.out.println("Synchronization ended!");
         }
     }
 
@@ -56,7 +56,7 @@ public class PokemonService {
         JsonNode root = restTemplate.getForObject(url, JsonNode.class);
 
         if (root == null) {
-            throw new RuntimeException("Pokémon não encontrado na API");
+            throw new RuntimeException("Pokémon not found on API");
         }
 
         PokemonEntity entity = new PokemonEntity();
