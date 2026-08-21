@@ -51,16 +51,15 @@ public class PokemonController {
     }
     @PostMapping("/sync-all")
     public ResponseEntity<String> syncAllPokemons() {
-        // Dispara a Thread em background para o Insomnia/Postman não ficar aguardando o carregamento dos 1000+ Pokémons
         new Thread(() -> {
             try {
                 tools.fetchAllAndSave();
             } catch (Exception e) {
-                System.err.println("Erro no processo de sincronização: " + e.getMessage());
+                System.err.println("Error: " + e.getMessage());
             }
         }).start();
 
-        return ResponseEntity.ok("Sincronização iniciada em background! Olhe o terminal/console da sua IDE para ver o progresso.");
+        return ResponseEntity.ok("Synchronization initialized in background!");
     }
 
 }
