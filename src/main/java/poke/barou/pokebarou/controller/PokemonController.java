@@ -19,6 +19,12 @@ public class PokemonController {
     private PokemonRepository comands;
     private PokemonService tools;
 
+    public PokemonController(PokemonRepository comands, PokemonService tools) {
+    this.comands = comands;
+    this.tools = tools;
+}
+
+
     @PostMapping
     public PokemonEntity savePokemon(@RequestBody PokemonEntity Pokemon){
         return comands.save(Pokemon);
